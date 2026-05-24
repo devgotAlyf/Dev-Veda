@@ -52,7 +52,7 @@ socketManager.init(server);
 // Start server
 connectDB()
   .then(() => {
-    server.listen(PORT, () => {
+    server.listen(PORT, '0.0.0.0', () => {
       console.log(`[VedaAI] Backend running on port ${PORT}`);
       console.log(`[VedaAI] CORS origin: ${FRONTEND_URL}`);
       console.log(`[VedaAI] Environment: ${process.env.NODE_ENV || 'development'}`);
