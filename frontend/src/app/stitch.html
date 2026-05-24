@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VedaAI - AI Assessment Creator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&amp;family=Public+Sans:wght@300;400;700;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+                navy: {
+                    800: '#1E293B',
+                    900: '#0F172A',
+                },
+                amber: {
+                    600: '#D97706',
+                },
+                cream: {
+                    50: '#FFFDF7',
+                },
+                sage: {
+                    600: '#4D7C6F',
+                }
+            },
+            borderRadius: {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            fontFamily: {
+                    "headline": ["Merriweather", "serif"],
+                    "display": ["Merriweather", "serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Public Sans", "sans-serif"]
+            },
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.paper-texture {
+    background-color: #FFFDF7;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDOKfDDEwcZ0hPoRwy0nyDtiyj4DyvKu6VGtnFS9E7x711OkXBKETGKps-I_K8BB3bVMc5FF-apOhaFT6nvdxxSA23gPhv1mUt5lrZBuxxsm8l10RnDDqx3G6s-jCgbGjFj_QAZfJqh03uQeFUKnWcyAExo6USrWiFu8tHHxmBqOn1szM3n-k9liylgX5Wi4N3lOMs2u3BmxNOUONqnEhHaoIs86vex05DOTGpau61x_qZog5lPt_lIfgp4PJP0PwjiTAV_ed5BKA)
+    }
+.double-divider {
+    border-top: 1px solid rgba(15, 23, 42, 0.1);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+    height: 4px
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="paper-texture text-navy-900 font-body min-h-screen pb-16">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FFFDF7] dark:bg-[#0F172A] border-b-2 border-[#0F172A]/10 shadow-sm flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#0F172A] dark:text-[#FFFDF7]">school</span>
+<span class="font-headline text-xl font-black text-[#0F172A] dark:text-[#FFFDF7] tracking-tight">VedaAI</span>
+</div>
+<button class="active:scale-95 transition-transform" onclick="toggleDrawer()">
+<span class="material-symbols-outlined text-[#0F172A] dark:text-[#FFFDF7]">menu</span>
+</button>
+</header>
+<!-- Navigation Drawer (Hidden by default) -->
+<div class="fixed inset-0 bg-black/50 z-[60] hidden transition-opacity duration-300 opacity-0" id="drawer-overlay" onclick="toggleDrawer()"></div>
+<aside class="fixed top-0 right-0 h-full w-[280px] z-[70] bg-[#FFFDF7] dark:bg-[#0F172A] border-l-2 border-[#0F172A] shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col py-8 gap-2" id="nav-drawer">
+<div class="px-6 mb-6">
+<h2 class="font-headline text-2xl text-[#0F172A] dark:text-[#FFFDF7]">VedaAI Navigation</h2>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="bg-[#D97706] text-[#FFFDF7] rounded-lg mx-2 flex items-center gap-4 px-4 py-3 font-body text-base" href="#">
+<span class="material-symbols-outlined">home</span> Home
+            </a>
+<a class="text-[#0F172A] dark:text-[#FFFDF7] hover:bg-[#4D7C6F]/10 mx-2 flex items-center gap-4 px-4 py-3 font-body text-base hover:pl-6 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">extension</span> Features
+            </a>
+<a class="text-[#0F172A] dark:text-[#FFFDF7] hover:bg-[#4D7C6F]/10 mx-2 flex items-center gap-4 px-4 py-3 font-body text-base hover:pl-6 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">info</span> About
+            </a>
+<a class="text-[#0F172A] dark:text-[#FFFDF7] hover:bg-[#4D7C6F]/10 mx-2 flex items-center gap-4 px-4 py-3 font-body text-base hover:pl-6 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">inventory_2</span> Product
+            </a>
+<a class="text-[#0F172A] dark:text-[#FFFDF7] hover:bg-[#4D7C6F]/10 mx-2 flex items-center gap-4 px-4 py-3 font-body text-base hover:pl-6 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">quiz</span> FAQ
+            </a>
+<a class="text-[#0F172A] dark:text-[#FFFDF7] hover:bg-[#4D7C6F]/10 mx-2 flex items-center gap-4 px-4 py-3 font-body text-base hover:pl-6 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">chat</span> Testimonials
+            </a>
+<a class="text-[#0F172A] dark:text-[#FFFDF7] hover:bg-[#4D7C6F]/10 mx-2 flex items-center gap-4 px-4 py-3 font-body text-base hover:pl-6 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">mail</span> Contact
+            </a>
+</nav>
+</aside>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative px-6 py-16 md:py-24 overflow-hidden">
+<!-- Background Decoration -->
+<div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+<div class="absolute top-0 right-0 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl -mr-48 -mt-48"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-sage-600/10 rounded-full blur-3xl -ml-40 -mb-40"></div>
+<svg class="absolute top-1/2 left-0 transform -translate-y-1/2" fill="none" height="200" viewbox="0 0 1440 200" width="100%">
+<path d="M0 100C150 50 300 150 450 100C600 50 750 150 900 100C1050 50 1200 150 1440 100" stroke="#4D7C6F" stroke-dasharray="10 10" stroke-width="1"></path>
+</svg>
+</div>
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+<div class="space-y-8">
+<h1 class="font-headline text-4xl md:text-6xl font-black text-navy-900 leading-tight">
+                        Smart AI Assessments For <span class="text-amber-600">Modern Education</span>
+</h1>
+<p class="text-lg md:text-xl text-navy-900/70 font-body leading-relaxed max-w-xl">
+                        Empower your teaching with VedaAI. Generate rigorous, curriculum-aligned exams and assessments in seconds. Spend less time formatting and more time educating.
+                    </p>
+<div class="pt-4">
+<button class="bg-[#D97706] text-white px-8 py-4 rounded-lg font-label font-bold text-lg shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all inline-flex items-center gap-3">
+                            Generate Assessment
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Mandatory Empty Second Column -->
+<div class="hidden md:block min-h-[400px]"></div>
+</div>
+</section>
+<div class="max-w-4xl mx-auto px-6">
+<div class="double-divider w-full my-8"></div>
+</div>
+<!-- Features Section -->
+<section class="px-6 py-20 max-w-7xl mx-auto">
+<div class="text-center mb-16 space-y-4">
+<h2 class="font-headline text-3xl md:text-4xl font-bold text-navy-900">Product Features</h2>
+<p class="font-body text-navy-900/60 max-w-2xl mx-auto">
+                    A suite of academic tools designed to elevate the standard of digital evaluation and feedback.
+                </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Feature 1 -->
+<div class="group p-8 bg-white border border-navy-900/5 rounded-xl hover:border-sage-600/30 hover:shadow-xl transition-all duration-300">
+<div class="w-16 h-16 rounded-full bg-sage-600/10 flex items-center justify-center mb-6 group-hover:bg-sage-600 group-hover:text-white transition-colors duration-300 text-sage-600">
+<span class="material-symbols-outlined text-3xl">verified</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-3 text-navy-900">High Quality</h3>
+<p class="font-body text-sm text-navy-900/70 leading-relaxed">
+                        Assessments are cross-referenced with educational standards to ensure academic rigor and accuracy.
+                    </p>
+</div>
+<!-- Feature 2 -->
+<div class="group p-8 bg-white border border-navy-900/5 rounded-xl hover:border-sage-600/30 hover:shadow-xl transition-all duration-300">
+<div class="w-16 h-16 rounded-full bg-sage-600/10 flex items-center justify-center mb-6 group-hover:bg-sage-600 group-hover:text-white transition-colors duration-300 text-sage-600">
+<span class="material-symbols-outlined text-3xl">psychology</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-3 text-navy-900">Intelligent Design</h3>
+<p class="font-body text-sm text-navy-900/70 leading-relaxed">
+                        AI-driven logic creates balanced papers with varying difficulty levels based on your criteria.
+                    </p>
+</div>
+<!-- Feature 3 -->
+<div class="group p-8 bg-white border border-navy-900/5 rounded-xl hover:border-sage-600/30 hover:shadow-xl transition-all duration-300">
+<div class="w-16 h-16 rounded-full bg-sage-600/10 flex items-center justify-center mb-6 group-hover:bg-sage-600 group-hover:text-white transition-colors duration-300 text-sage-600">
+<span class="material-symbols-outlined text-3xl">auto_awesome</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-3 text-navy-900">Latest Technology</h3>
+<p class="font-body text-sm text-navy-900/70 leading-relaxed">
+                        Powered by the most advanced LLMs trained specifically for pedagogical content generation.
+                    </p>
+</div>
+<!-- Feature 4 -->
+<div class="group p-8 bg-white border border-navy-900/5 rounded-xl hover:border-sage-600/30 hover:shadow-xl transition-all duration-300">
+<div class="w-16 h-16 rounded-full bg-sage-600/10 flex items-center justify-center mb-6 group-hover:bg-sage-600 group-hover:text-white transition-colors duration-300 text-sage-600">
+<span class="material-symbols-outlined text-3xl">touch_app</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-3 text-navy-900">User Friendly</h3>
+<p class="font-body text-sm text-navy-900/70 leading-relaxed">
+                        Intuitive workspace that feels like a familiar notebook. No complex prompt engineering required.
+                    </p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-4 bg-[#0F172A] dark:bg-[#0F172A] rounded-t-xl border-t-2 border-[#D97706]/20 shadow-[0_-4px_10px_rgba(0,0,0,0.1)]">
+<a class="flex flex-col items-center justify-center text-[#D97706] scale-110 active:translate-y-[-2px] transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label text-xs uppercase tracking-wider">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FFFDF7]/70 hover:text-[#FFFDF7] active:translate-y-[-2px] transition-all" href="#">
+<span class="material-symbols-outlined">star</span>
+<span class="font-label text-xs uppercase tracking-wider">Features</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FFFDF7]/70 hover:text-[#FFFDF7] active:translate-y-[-2px] transition-all" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label text-xs uppercase tracking-wider">Create</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FFFDF7]/70 hover:text-[#FFFDF7] active:translate-y-[-2px] transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label text-xs uppercase tracking-wider">Profile</span>
+</a>
+</nav>
+<script>
+        function toggleDrawer() {
+            const drawer = document.getElementById('nav-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            const isOpen = drawer.classList.contains('translate-x-0');
+
+            if (isOpen) {
+                drawer.classList.remove('translate-x-0');
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('hidden');
+                overlay.classList.remove('opacity-100');
+            } else {
+                drawer.classList.remove('translate-x-full');
+                drawer.classList.add('translate-x-0');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.add('opacity-100'), 10);
+            }
+        }
+    </script>
+</body></html>
