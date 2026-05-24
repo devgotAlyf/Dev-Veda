@@ -55,7 +55,7 @@ export default function AssignmentsPage() {
             <div 
               key={assignment.id} 
               className="bg-white rounded-2xl p-6 shadow-sm border border-ink/5 hover:shadow-md transition-shadow animate-in fade-in slide-in-from-bottom-4"
-              style={{ animationDelay: `${i * 100}ms`, fillMode: 'both' }}
+              style={{ animationDelay: `${i * 100}ms` } as React.CSSProperties}
             >
               <div className="flex justify-between items-start mb-4">
                 <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
