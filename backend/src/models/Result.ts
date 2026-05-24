@@ -10,6 +10,7 @@ export interface IQuestion {
   difficulty: (typeof DIFFICULTY_LEVELS)[number];
   marks: number;
   options: string[];
+  answer?: string;
 }
 
 export interface ISection {
@@ -51,6 +52,7 @@ const questionSchema = new Schema<IQuestion>(
     },
     marks: { type: Number, required: true },
     options: { type: [String], default: [] },
+    answer: { type: String },
   },
   { _id: false }
 );

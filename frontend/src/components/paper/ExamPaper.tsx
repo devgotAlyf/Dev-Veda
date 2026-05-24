@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GeneratedPaper } from '../../types';
 import { PaperHeader } from './PaperHeader';
 import { StudentInfoRow } from './StudentInfoRow';
 import { SectionBlock } from './SectionBlock';
+import { Eye, EyeOff } from 'lucide-react';
 
 export const ExamPaper: React.FC<{ paper: GeneratedPaper }> = ({ paper }) => {
+  const [showAnswers, setShowAnswers] = useState(false);
+  
+  // Check if any question has an answer
+  const hasAnswers = paper.sections.some(s => s.questions.some(q => q.answer));
   return (
     <div className="bg-white rounded-xl shadow-lifted max-w-[850px] mx-auto overflow-hidden relative print:shadow-none print:max-w-none print:m-0">
       
@@ -23,6 +28,18 @@ export const ExamPaper: React.FC<{ paper: GeneratedPaper }> = ({ paper }) => {
         
         <StudentInfoRow />
 
+        {hasAnswers && (
+          <div className="flex justify-end mb-6 print:hidden">
+            <button
+              onClick={() => setShowAnswers(!showAnswers)}
+              className="flex items-center gap-2 px-4 py-2 bg-amber/10 text-amber hover:bg-amber/20 rounded-md font-sans text-sm font-bold transition-colors"
+            >
+              {showAnswers ? <EyeOff size={16} /> : <Eye size={16} />}
+              {showAnswers ? 'Hide Solutions' : 'Show Solutions'}
+            </button>
+          </div>
+        )}
+
         {paper.instructions && paper.instructions.length > 0 && (
           <div className="mb-10">
             <h4 className="font-serif font-bold text-navy mb-2">General Instructions:</h4>
@@ -38,7 +55,7 @@ export const ExamPaper: React.FC<{ paper: GeneratedPaper }> = ({ paper }) => {
 
         <div className="sections-container">
           {paper.sections.map((section, idx) => (
-            <SectionBlock key={idx} section={section} />
+            <SectionBlock key={idx} section={section} showAnswers={showAnswers} />
           ))}
         </div>
 

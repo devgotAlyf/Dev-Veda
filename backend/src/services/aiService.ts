@@ -14,6 +14,7 @@ export interface AssessmentInput {
   difficulty: string;
   additionalInstructions: string;
   fileContent: string;
+  includeSolutions?: boolean;
 }
 
 interface GeneratedQuestion {
@@ -23,6 +24,7 @@ interface GeneratedQuestion {
   difficulty: string;
   marks: number;
   options: string[];
+  answer?: string;
 }
 
 interface GeneratedSection {
@@ -53,6 +55,7 @@ export async function generateAssessment(data: AssessmentInput): Promise<Generat
     difficulty,
     additionalInstructions,
     fileContent,
+    includeSolutions,
   } = data;
 
   const prompt = `You are an expert academic question paper creator.
@@ -76,6 +79,7 @@ Rules:
 - Estimated duration = totalMarks × 1.5 minutes, formatted as 'X Hours Y Minutes'
 - Write natural, examiner-quality question text
 - Vary cognitive levels (recall, apply, analyze)
+${includeSolutions ? '- For every question, you MUST provide a detailed "answer" string. For MCQs, provide the correct option and a brief explanation.' : ''}
 
 Respond ONLY with valid JSON. No markdown. No explanation.
 JSON structure:
@@ -99,7 +103,7 @@ JSON structure:
           "type": "mcq|short|long|true_false",
           "difficulty": "easy|medium|hard",
           "marks": number,
-          "options": []
+          "options": []${includeSolutions ? ',\n          "answer": "string"' : ''}
         }
       ]
     }

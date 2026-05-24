@@ -2,8 +2,9 @@ import React from 'react';
 import { Question } from '../../types';
 import { MarksTag } from './MarksTag';
 import { DifficultyBadge } from './DifficultyBadge';
+import { Lightbulb } from 'lucide-react';
 
-export const QuestionRow: React.FC<{ question: Question }> = ({ question }) => {
+export const QuestionRow: React.FC<{ question: Question, showAnswers?: boolean }> = ({ question, showAnswers }) => {
   const formatNumber = (num: number) => (num < 10 ? `0${num}.` : `${num}.`);
 
   return (
@@ -28,6 +29,18 @@ export const QuestionRow: React.FC<{ question: Question }> = ({ question }) => {
                   </div>
                 );
               })}
+            </div>
+          )}
+
+          {showAnswers && question.answer && (
+            <div className="mt-4 p-4 bg-sage/10 border border-sage/20 rounded-md">
+              <div className="flex items-center gap-2 mb-2 text-sage font-bold font-sans text-sm uppercase tracking-wide">
+                <Lightbulb size={16} />
+                Answer Key
+              </div>
+              <p className="font-sans text-sm text-ink leading-relaxed whitespace-pre-wrap">
+                {question.answer}
+              </p>
             </div>
           )}
         </div>

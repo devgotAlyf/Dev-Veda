@@ -85,6 +85,7 @@ router.post(
         difficulty: req.body.difficulty,
         additionalInstructions: req.body.additionalInstructions || '',
         fileContent,
+        includeSolutions: req.body.includeSolutions === 'true',
       });
 
       await assignment.save();

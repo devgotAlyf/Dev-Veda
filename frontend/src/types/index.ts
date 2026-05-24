@@ -9,6 +9,7 @@ export interface AssignmentFormData {
   difficulty: string;
   additionalInstructions: string;
   file: File | null;
+  includeSolutions?: boolean;
 }
 
 export interface Question {
@@ -18,6 +19,7 @@ export interface Question {
   difficulty: 'easy' | 'medium' | 'hard';
   marks: number;
   options: string[];
+  answer?: string;
 }
 
 export interface Section {
@@ -53,6 +55,7 @@ export interface Assignment {
   totalMarks: number;
   difficulty: string;
   additionalInstructions: string;
+  includeSolutions?: boolean;
   status: 'pending' | 'processing' | 'completed' | 'failed';
   jobId?: string;
   errorMessage?: string;

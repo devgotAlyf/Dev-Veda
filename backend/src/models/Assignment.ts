@@ -32,6 +32,7 @@ export interface IAssignment {
   difficulty: Difficulty;
   additionalInstructions: string;
   fileContent: string;
+  includeSolutions: boolean;
   status: Status;
   jobId?: string;
   errorMessage?: string;
@@ -104,6 +105,10 @@ const assignmentSchema = new Schema<AssignmentDocument>(
     fileContent: {
       type: String,
       default: '',
+    },
+    includeSolutions: {
+      type: Boolean,
+      default: false,
     },
     status: {
       type: String,

@@ -2,7 +2,7 @@ import React from 'react';
 import { Section } from '../../types';
 import { QuestionRow } from './QuestionRow';
 
-export const SectionBlock: React.FC<{ section: Section }> = ({ section }) => {
+export const SectionBlock: React.FC<{ section: Section, showAnswers?: boolean }> = ({ section, showAnswers }) => {
   return (
     <div className="mb-10">
       <div className="mb-4">
@@ -18,7 +18,7 @@ export const SectionBlock: React.FC<{ section: Section }> = ({ section }) => {
       
       <div>
         {section.questions.map((q, idx) => (
-          <QuestionRow key={idx} question={q} />
+          <QuestionRow key={idx} question={q} showAnswers={showAnswers} />
         ))}
       </div>
     </div>

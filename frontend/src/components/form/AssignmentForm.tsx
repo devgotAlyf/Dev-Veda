@@ -13,6 +13,7 @@ import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
 import { Textarea } from '../ui/Textarea';
 import { Button } from '../ui/Button';
+import { Checkbox } from '../ui/Checkbox';
 import { FileDropzone } from './FileDropzone';
 import { QuestionTypeGrid } from './QuestionTypeGrid';
 import { DifficultyPicker } from './DifficultyPicker';
@@ -38,6 +39,7 @@ export const AssignmentForm: React.FC = () => {
       totalMarks: formData.totalMarks || 50,
       difficulty: formData.difficulty || defaultDifficulty || '',
       additionalInstructions: formData.additionalInstructions || '',
+      includeSolutions: formData.includeSolutions || false,
       file: formData.file || null,
     }
   });
@@ -63,6 +65,8 @@ export const AssignmentForm: React.FC = () => {
         } else if (key === 'additionalInstructions') {
           const toneInstruction = promptTone !== 'Neutral' ? `\n\nTone Directive: Please write the questions in a ${promptTone} tone.` : '';
           formDataObj.append(key, (value ? value.toString() : '') + toneInstruction);
+        } else if (key === 'includeSolutions') {
+          formDataObj.append(key, value ? 'true' : 'false');
         } else if (value !== null && value !== undefined) {
           formDataObj.append(key, value.toString());
         }
@@ -193,6 +197,21 @@ export const AssignmentForm: React.FC = () => {
                 <FileDropzone onFileSelect={field.onChange} selectedFile={field.value} />
               )}
             />
+          </div>
+
+          <div className="mb-8">
+            <Controller
+              name="includeSolutions"
+              control={control}
+              render={({ field }) => (
+                <Checkbox 
+                  label="Generate Answer Key / Solutions" 
+                  checked={field.value} 
+                  onChange={(e) => field.onChange(e.target.checked)} 
+                />
+              )}
+            />
+            <p className="text-sm text-navy/60 mt-2 ml-8">AI will generate a detailed solution for every question.</p>
           </div>
 
           <Textarea

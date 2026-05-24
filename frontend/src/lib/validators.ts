@@ -10,5 +10,6 @@ export const assignmentSchema = z.object({
   totalMarks: z.number({ invalid_type_error: "Must be a number" }).int().min(1, 'Total marks must be at least 1'),
   difficulty: z.string().min(1, 'Select a difficulty level'),
   additionalInstructions: z.string().max(2000).optional().default(''),
+  includeSolutions: z.boolean().optional().default(false),
   file: z.any().refine((val) => val !== null && val !== undefined, "PDF reference material is required"),
 });

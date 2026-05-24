@@ -43,6 +43,7 @@ const worker = new Worker<AssessmentJobData>(
       difficulty: assignment.difficulty,
       additionalInstructions: assignment.additionalInstructions,
       fileContent: assignment.fileContent,
+      includeSolutions: assignment.includeSolutions,
     };
 
     // 5. Emit progress: prompt built
