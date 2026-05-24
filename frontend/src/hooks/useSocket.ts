@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useAssignmentStore } from '../store/useAssignmentStore';
-import { getResult } from '../lib/api';
-import api from '../lib/api';
+import { getResult, api } from '../lib/api';
 import { useRouter } from 'next/navigation';
 
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:5000';
@@ -15,14 +14,12 @@ export function useSocket(assignmentId: string | null) {
 
   useEffect(() => {
     if (!assignmentId) return;
-
     const socket: Socket = io(SOCKET_URL);
 
     socket.on('connect', async () => {
       setIsConnected(true);
       socket.emit('join', assignmentId);
       
-      // Fetch initial status to prevent race conditions where the job fails before socket connects
       try {
         const response = await api.get(`/assignments/${assignmentId}`);
         const assignment = response.data.assignment;
